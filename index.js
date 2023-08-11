@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import flash from 'express-flash';
 import session from 'express-session';
 import Greetings from './Greetings_factory_function.js';
-import greet from './lelly_factory.js';
+
 
 const app = express();
 const greeting = Greetings();

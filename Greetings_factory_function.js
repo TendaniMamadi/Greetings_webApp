@@ -1,6 +1,5 @@
 export default function Greetings(list) {
     let namesGreeted = [];
-    let user = "";
     let clearMsg = "";
     let greetingMsg = "";
     let selectedLanguage = "";
