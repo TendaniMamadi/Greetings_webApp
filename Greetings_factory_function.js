@@ -16,9 +16,9 @@ export default function Greetings(list) {
     function greetings1(preparedName, selectedLanguage) {
         preparedName = prepareName(preparedName);
 
-        // if (!regex.test(preparedName)) {
+        //  if (!regex.test(preparedName)) {
         //     return "No numbers & characters allowed!";
-        // }
+        //  }
 
 
         if (greeted(preparedName)) {
