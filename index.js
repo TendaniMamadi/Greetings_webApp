@@ -7,7 +7,7 @@ import Greetings from './Greetings_factory_function.js';
 
 
 const app = express();
-const greeting = Greetings();
+const greetingInstance = Greetings();
 
 app.engine('handlebars', engine({
     layoutsDir: './views/layouts'
@@ -35,8 +35,8 @@ app.use(flash())
 
 app.get("/", function (req, res) {
     res.render('index', {
-        greeted: greeting.displayGreetingMsg(),
-        count: greeting.counter()
+        greeted: greetingInstance.displayGreetingMsg(),
+        count: greetingInstance.counter()
     });
 });
 
@@ -46,26 +46,29 @@ app.post("/Greetings", (req, res) => {
     const name = req.body.nameInput;
     const language = req.body.Language;
 
-    const greetingMessage = greeting.greetings1(name, language);
+    const greetingMessage = greetingInstance.greetings1(name, language);
+    const namesGreeted = greetingInstance.getNamesThatAreGreeted();
     res.redirect('/')
 });
 
 
+
 app.get('/greeted', (req, res) => {
 
-    const users = greeting.greeted()
-    const usersCount = greeting.getNamesThatAreGreeted()
+    const users = greetingInstance.greeted()
+    const usersCount = greetingInstance.getNamesThatAreGreeted()
 
-    res.render('greeted', { users });
+    res.render('greeted', { user: greetingInstance.getNamesThatAreGreeted() });
 });
+
+
 
 app.get("/counter/:name", function (req, res) {
     const name = req.params.name;
-    const usersCount = greeting.getNamesThatAreGreeted()
-    const count = greeting.counter();
-    res.render("counter", { name, usersCount, count });
+    const usersCount = greetingInstance.getNamesThatAreGreeted()
+    const count = greetingInstance.counter();
+    res.render('counter', { name, usersCount, count });
 });
-
 
 
 const PORT = process.env.PORT || 3011;

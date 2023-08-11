@@ -1,5 +1,5 @@
 export default function Greetings(list) {
-    let namesGreeted = [];
+    let namesGreeted = list || [];
     let clearMsg = "";
     let greetingMsg = "";
     let selectedLanguage = "";
@@ -61,6 +61,8 @@ export default function Greetings(list) {
     function getNamesThatAreGreeted() {
         return namesGreeted;
     }
+
+   
 
     function counter() {
         return namesGreeted.length;

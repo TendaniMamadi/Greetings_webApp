@@ -1,10 +1,15 @@
-  <div class="user-list">
-    <ul>
-        {{#each users}}
-        <li>
-            <p><a href="/counter/{{namesGreeted}}" class="nav-link text-info">{{namesGreeted}}</a></p>
-        </li>
+<div class="row">
+    <h1>Greeted Names</h1>
+    <table>
+        <tr>
+            <th>Users</th>
+        </tr>
+        {{#each user}}
+        <tr>
+            <td>{{this}}</td>
+        </tr>
         {{/each}}
-    </ul>
-    <a href="/" class="nav-link text-info">Click here to go back to Greeting Form</a>
+    </table>
 </div>
+<a href="/" class="nav-link text-info">Click here to go back to Greeting Form</a> 
+
