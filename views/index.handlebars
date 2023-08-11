@@ -1,37 +1,43 @@
 <div class="container">
+
     <section class="Top">
         <div class="heading">
             <h1>Greetings</h1>
         </div>
     </section>
 
+  
+
+
     <section class="middle">
         <div class="functionality">
-            <h5 style="margin-top: 1.5rem;color:#45a29e;">
+
+            <h5>
                 Number of Greetings:
-                <span style="color: #66fcf1;font-size: 1.6rem;" class="count">{{count}}</span>
+                <span  class="count">{{count}}</span>
             </h5>
 
-            <form action="/" method="POST">
+            <form action="/Greetings" method="POST">
+
                 <div class="Error">
                     <p class="message">{{greeted}}</p>
                 </div>
 
                 <label for="nameInput" style="color: #45a29e;">Name:</label>
-                <input id="nameInput" type="text" class="textBox" placeholder="Enter your name">
+                <input id="nameInput" type="text" name="nameInput" class="textBox" placeholder="Enter your name">
 
                 <div class="row">
                     <div class="col-sm-4">
                         <input type="radio" name="Language" value="Eng" id="English">
-                        <label for="English" style="color: #45a29e">English</label>
+                        <label for="English">English</label>
                     </div>
                     <div class="col-sm-4">
                         <input type="radio" name="Language" value="Esp" id="Spanish">
-                        <label for="Spanish" style="color: #45a29e">Spanish</label>
+                        <label for="Spanish">Spanish</label>
                     </div>
                     <div class="col-sm-4">
                         <input type="radio" name="Language" value="Ven" id="TshiVenda">
-                        <label for="TshiVenda" style="color: #45a29e">TshiVenda</label>
+                        <label for="TshiVenda">TshiVenda</label>
                     </div>
                 </div>
 
@@ -42,4 +48,8 @@
 
 
     </section>
+
+
 </div>
+
+ <p><a href="/greeted" class="nav-link text-info">Click here to see greeted users</a></p>

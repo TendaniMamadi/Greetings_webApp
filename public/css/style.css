@@ -1,36 +1,36 @@
-body {
-    background-color: #1f2833;
-    margin: 0;
+/* body {
+    /* background-color: #1f2833; */
+    /* margin: 0;
     padding: 0;
-}
+} */ */
 
-.container-fluid {
+/* .container-fluid {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
     text-align: center;
-}
+} */
 
-h1 {
+/* h1 {
     color: #66fcf1;
     text-align: center;
     font-size: 3rem
-}
+} */
 
-.check {
+/* .check {
 
     margin: 3rem 0rem 3rem 0rem;
     font-size: 1.4rem;
 
-}
-.Error {
+} */
+/* .Error {
     font-size: x-large;
-}
+} */
 
 
-.btn input {
+/* .btn input {
     display: inline-block;
     padding: 1rem 2.8rem;
     background: #1f2833;
@@ -42,34 +42,34 @@ h1 {
     font-weight: 600;
     transition: .5s ease;
 
-}
+} */
 
-.btn:hover {
+/* .btn:hover {
     box-shadow: none;
-}
+} */
 
 
-
+/* 
 .functionality input {
 
     height: 44px;
     margin-left: 5px;
     display: inline-block;
     font-size: x-large;
-}
+} */
 
-.functionality label {
+/* .functionality label {
     display: inline-block;
     font-size: 1.7rem;
     margin-left: 5px;
-}
+} */
 
-.functionality span {
+/* .functionality span {
     display: inline-table;
     font-size: 2rem;
     margin-left: 3px;
 
-}
+} */
 
 .orange {
     color: orange;

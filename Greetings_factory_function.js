@@ -1,36 +1,57 @@
 export default function Greetings(list) {
-    var namesGreeted = list || [];
+    let namesGreeted = [];
+    let user = "";
     let clearMsg = "";
+    let greetingMsg = "";
+    let selectedLanguage = "";
+    let nameAndGreeting = "";
+    let errorMsg = "";
+
 
     const regex = /^[A-Za-z]+$/;
 
     function prepareName(name) {
-        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        return name
     }
 
-    function greetings1(preparedName, language) {
+    function greetings1(preparedName, selectedLanguage) {
         preparedName = prepareName(preparedName);
 
-        if (!regex.test(preparedName)) {
-            return "No numbers & characters allowed!";
-        }
+        // if (!regex.test(preparedName)) {
+        //     return "No numbers & characters allowed!";
+        // }
+
 
         if (greeted(preparedName)) {
-            switch (language) {
-                case "Eng":
-                    return "Hello! " + preparedName;
-                case "Esp":
-                    return "Hola! " + preparedName;
-                case "Ven":
-                    return "Ndaa! " + preparedName;
+
+            if (selectedLanguage === "Eng") {
+                greetingMsg = "Hello!" + " " + preparedName
             }
-        } else {
-            return "Name already exists!";
+
+            else if (selectedLanguage === "Esp") {
+                greetingMsg = "Ola!" + " " + preparedName
+            }
+
+            else if (selectedLanguage === "Ven") {
+                greetingMsg = "Ndaa!" + " " + preparedName
+            }
         }
+
+        return nameAndGreeting;
+    }
+
+    function setSelectedLanguage() {
+
+        selectedLanguage = language
+        return selectedLanguage
+    }
+
+    function displayGreetingMsg() {
+        return greetingMsg
     }
 
     function greeted(preparedName) {
-        preparedName = prepareName(preparedName);
+        //preparedName = prepareName(preparedName);
 
         if (!namesGreeted.includes(preparedName)) {
             namesGreeted.push(preparedName);
@@ -38,7 +59,7 @@ export default function Greetings(list) {
         }
     }
 
-    function getArray() {
+    function getNamesThatAreGreeted() {
         return namesGreeted;
     }
 
@@ -47,22 +68,36 @@ export default function Greetings(list) {
     }
 
     function errorMessage(radioBtn, inputType) {
+
         if (!inputType && !radioBtn) {
-            return "Please enter your name & select language!";
+
+            errorMsg = "Please enter your name & select language!";
+
         }
 
+
         if (!radioBtn) {
-            return "Please select language!";
-        } else if (!inputType) {
-            switch (radioBtn) {
-                case "Eng":
-                    return "Please enter your name!";
-                case "Esp":
-                    return "Introduzca su nombre!";
-                case "Ven":
-                    return "Dzhenisani dzina!";
-            }
+            errorMsg =  "Please select language!";
+
         }
+
+        else if (!inputType) {
+
+            if (radioBtn === "Eng") {
+                errorMsg =  "Please enter your name!"
+
+            } else if (radioBtn === "Esp") {
+                errorMsg =  "Introduzca su nombre!"
+
+            } else if
+                (radioBtn === "Ven") {
+                    errorMsg = "Dzhenisani dzina!"
+
+            }
+
+        }
+
+
     }
 
     function clearButton() {
@@ -74,13 +109,18 @@ export default function Greetings(list) {
         return clearMsg;
     }
 
+ 
+      
+
     return {
         greetings1,
+        displayGreetingMsg,
+        setSelectedLanguage,
         greeted,
-        getArray,
+        getNamesThatAreGreeted,
         counter,
         errorMessage,
         clearButton,
-        getClearMsg
+        getClearMsg        
     };
 }
