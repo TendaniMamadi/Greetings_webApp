@@ -1,13 +1,14 @@
 export default function Greetings(list) {
-    let namesGreeted = list || [];
+    let namesGreeted = {};
     let clearMsg = "";
     let greetingMsg = "";
     let selectedLanguage = "";
     let nameAndGreeting = "";
-    let errorMsg = "";
+    let namesCounted = 0;
 
 
-    const regex = /^[A-Za-z]+$/;
+
+    // const regex = /^[A-Za-z]+$/;
 
     function prepareName(name) {
         return name
@@ -50,23 +51,65 @@ export default function Greetings(list) {
     }
 
     function greeted(preparedName) {
-        //preparedName = prepareName(preparedName);
 
-        if (!namesGreeted.includes(preparedName)) {
-            namesGreeted.push(preparedName);
-            return true;
+        //console.log(namesGreeted.includes(preparedName));
+        //loop over list
+        //have access to an object
+        //check names that already there 
+        //if there increment the count
+        // if not push
+        for (const user in namesGreeted) {
+            if (namesGreeted.hasOwnProperty(namesGreeted, user)) {
+                const element = namesGreeted[user];
+
+            }
         }
+
+        if (namesGreeted[preparedName] === undefined) {
+            namesGreeted[preparedName] = 0;
+            namesCounted++
+        }
+
+        namesGreeted[preparedName] += 1;
+
+
+        // if (namesGreeted.includes(preparedName) === false) {
+        //     namesGreeted.push({ names: preparedName, number: 1 });
+        //     // return true;
+        // }
+        //  else {
+        //      console.log("user already exist");
+        //  }
     }
+
+    //console.log(getNamesThatAreGreeted());
 
     function getNamesThatAreGreeted() {
         return namesGreeted;
     }
 
-   
+    function getGreetCount(name) {
+        const preparedName = prepareName(name);
+
+        for (const user of namesGreeted) {
+            if (user.names === preparedName)
+                return user.number;
+        }
+
+    }
+
 
     function counter() {
-        return namesGreeted.length;
+        return namesCounted;
     }
+
+    function savedNames() {
+        var newListOfNamesSaved = Object.keys(namesGreeted)
+        // console.log(newList);
+        return newListOfNamesSaved;
+    }
+
+
 
     function errorMessage(radioBtn, inputType) {
 
@@ -78,21 +121,21 @@ export default function Greetings(list) {
 
 
         if (!radioBtn) {
-            errorMsg =  "Please select language!";
+            errorMsg = "Please select language!";
 
         }
 
         else if (!inputType) {
 
             if (radioBtn === "Eng") {
-                errorMsg =  "Please enter your name!"
+                errorMsg = "Please enter your name!"
 
             } else if (radioBtn === "Esp") {
-                errorMsg =  "Introduzca su nombre!"
+                errorMsg = "Introduzca su nombre!"
 
             } else if
                 (radioBtn === "Ven") {
-                    errorMsg = "Dzhenisani dzina!"
+                errorMsg = "Dzhenisani dzina!"
 
             }
 
@@ -110,8 +153,8 @@ export default function Greetings(list) {
         return clearMsg;
     }
 
- 
-      
+
+
 
     return {
         greetings1,
@@ -119,9 +162,11 @@ export default function Greetings(list) {
         setSelectedLanguage,
         greeted,
         getNamesThatAreGreeted,
+        getGreetCount,
         counter,
+        savedNames,
         errorMessage,
         clearButton,
-        getClearMsg        
+        getClearMsg
     };
 }

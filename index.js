@@ -33,6 +33,48 @@ app.use(flash())
 
 
 
+// // Home Route
+// app.get('/', (req, res) => {
+
+//     res.render('/', {
+//         greeted: greetingInstance.greetings1(),
+//         count: greetingInstance.counter()
+//     });
+
+// });
+
+// // Greetings Route
+// app.post('/greetings', (req, res) => {
+//     const name = req.body.name;
+//     const language = req.body.language;
+
+//     const message = greetingInstance.greetings1(name, language);
+
+//     req.flash('success', message);
+//     res.redirect('/');
+// });
+
+// // Greeted Route
+// app.get('/greeted', (req, res) => {
+//     const names = greetingInstance.getArray();
+//     res.render('greeted', { names });
+// });
+
+// // Counter Route
+// app.get('/counter', (req, res) => {
+//     const count = greetingInstance.counter();
+//     res.render('counter', { count });
+// });
+
+const PORT = process.env.PORT || 3011;
+
+app.listen(PORT, function (req, res) {
+    console.log('App starting at port:', PORT);
+});
+
+// Start the server
+// 
+
 app.get("/", function (req, res) {
     res.render('index', {
         greeted: greetingInstance.displayGreetingMsg(),
@@ -48,9 +90,10 @@ app.post("/Greetings", (req, res) => {
 
     const greetingMessage = greetingInstance.greetings1(name, language);
     const namesGreeted = greetingInstance.getNamesThatAreGreeted();
+    greetingInstance.greeted(name)
     res.redirect('/')
 });
-
+console.log(greetingInstance.getNamesThatAreGreeted());
 
 
 app.get('/greeted', (req, res) => {
@@ -65,14 +108,9 @@ app.get('/greeted', (req, res) => {
 
 app.get("/counter/:name", function (req, res) {
     const name = req.params.name;
-    const usersCount = greetingInstance.getNamesThatAreGreeted()
-    const count = greetingInstance.counter();
-    res.render('counter', { name, usersCount, count });
+    const greetCount = greetingInstance.getGreetCount(name);
+    console.log(greetingInstance.getGreetCount(name))
+    res.render('counter', { counter: greetCount, name });
 });
 
 
-const PORT = process.env.PORT || 3011;
-
-app.listen(PORT, function (req, res) {
-    console.log('App starting at port:', PORT);
-});

@@ -2,7 +2,7 @@
 
     <section class="Top">
         <div class="heading">
-            <h1>Greetings</h1>
+            <h1><a href="/greeted" class="nav-link text-info">Greetings</a></h1>
         </div>
     </section>
 
@@ -17,8 +17,12 @@
 
             <form action="/Greetings" method="POST">
 
-                <div class="Error">
+                <div class="greet">
                     <p class="message">{{greeted}}</p>
+                </div>
+
+                <div class="Error">
+                    <p class="message"></p>
                 </div>
 
                 <label for="nameInput" style="color: #45a29e;">Name:</label>
@@ -40,6 +44,9 @@
                 </div>
 
                 <button type="submit" value="Greet Me" class="btn btn-primary btn-sm greetings">Greet</button>
+            </form>
+            <form action="" method="POST">
+
                 <button type="submit" value="Clear" class="btn btn-primary btn-sm clearing">Clear</button>
             </form>
         </div>
@@ -50,4 +57,4 @@
 
 </div>
 
- <p><a href="/greeted" class="nav-link text-info">Click here to see greeted users</a></p>
+ <p></p>

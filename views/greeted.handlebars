@@ -1,15 +1,17 @@
 <div class="row">
     <h1>Greeted Names</h1>
     <table>
-        <tr>
-            <th>Users</th>
-        </tr>
         {{#each user}}
         <tr>
-            <td>{{this}}</td>
+
+            <td>
+                <li>
+                    <a href="/counter/{{names}}">{{names}}</a>
+                </li>
+            </td>
+
         </tr>
         {{/each}}
     </table>
 </div>
-<a href="/" class="nav-link text-info">Click here to go back to Greeting Form</a> 
-
+<a href="/" class="nav-link text-info">Click here to go back to Greeting Form</a>
