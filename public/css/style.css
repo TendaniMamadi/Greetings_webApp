@@ -1,7 +1,17 @@
-body {
-    background-color: #1f2833;
+*{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1f2833;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    text-align: center;
+   
 }
 
 .container-fluid {
@@ -9,12 +19,15 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
     text-align: center;
 }
 
+a {
+    color: #b10f65
+}
+
 h1 {
-    color: #66fcf1;
+    color:#b10f65;
     text-align: center;
     font-size: 3rem
 }
@@ -30,14 +43,14 @@ h1 {
 }
 
 
-.btn input {
+.btn {
     display: inline-block;
     padding: 1rem 2.8rem;
     background: #1f2833;
     border-radius: 4rem;
     box-shadow: 0 0 1rem;
     font-size: 1.6rem;
-    color: #66fcf1;
+    color: #760fb1;
     letter-spacing: .1rem;
     font-weight: 600;
     transition: .5s ease;
