@@ -38,7 +38,7 @@ app.use(flash())
 
 
 // Start the server
-const PORT = process.env.PORT || 3011;
+const PORT = process.env.PORT || 3012;
 
 app.listen(PORT, function (req, res) {
     console.log('App starting at port:', PORT);
@@ -68,12 +68,12 @@ app.post("/Greetings",async (req, res) => {
    
     res.redirect('/')
 });
-// console.log(greetingInstance.getNamesThatAreGreeted());
 
 
-app.get('/greeted', (req, res) => {
 
-    const users = greetingInstance.greetedNames()
+app.get('/greeted', async (req, res) => {
+
+    const users = await greetingInstance.greetedNames()
     
 
     res.render('greeted', { user:users});
@@ -81,9 +81,9 @@ app.get('/greeted', (req, res) => {
 
 
 
-app.get("/counter/:name", function (req, res) {
-    const greetCount = greetingInstance.greetedNames();
-    res.render('counter', { counter: greetCount});
+app.get("/counter/:name", async function (req, res) {
+    const greetCount = await greetingInstance.greetedNames();
+    res.render('counter', { count: greetCount});
 });
 
 
