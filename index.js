@@ -33,84 +33,48 @@ app.use(flash())
 
 
 
-// // Home Route
-// app.get('/', (req, res) => {
-
-//     res.render('/', {
-//         greeted: greetingInstance.greetings1(),
-//         count: greetingInstance.counter()
-//     });
-
-// });
-
-// // Greetings Route
-// app.post('/greetings', (req, res) => {
-//     const name = req.body.name;
-//     const language = req.body.language;
-
-//     const message = greetingInstance.greetings1(name, language);
-
-//     req.flash('success', message);
-//     res.redirect('/');
-// });
-
-// // Greeted Route
-// app.get('/greeted', (req, res) => {
-//     const names = greetingInstance.getArray();
-//     res.render('greeted', { names });
-// });
-
-// // Counter Route
-// app.get('/counter', (req, res) => {
-//     const count = greetingInstance.counter();
-//     res.render('counter', { count });
-// });
-
+// Start the server
 const PORT = process.env.PORT || 3011;
 
 app.listen(PORT, function (req, res) {
     console.log('App starting at port:', PORT);
 });
 
-// Start the server
-// 
+// Routes
 
 app.get("/", function (req, res) {
     res.render('index', {
-        greeted: greetingInstance.displayGreetingMsg(),
-        count: greetingInstance.counter()
+        greeted: greetingInstance.getGreetingMsg(),
+       count: greetingInstance.counter()
     });
 });
 
 
 app.post("/Greetings", (req, res) => {
 
-    const name = req.body.nameInput;
-    const language = req.body.Language;
+    const username = req.body.nameInput;
+    const selectedLanguage = req.body.Language;
 
-    const greetingMessage = greetingInstance.greetings1(name, language);
-    const namesGreeted = greetingInstance.getNamesThatAreGreeted();
-    greetingInstance.greeted(name)
+    const greetingMessage = greetingInstance.setGreeting(username, selectedLanguage);
+   
     res.redirect('/')
 });
-console.log(greetingInstance.getNamesThatAreGreeted());
+// console.log(greetingInstance.getNamesThatAreGreeted());
 
 
 app.get('/greeted', (req, res) => {
 
-    const users = greetingInstance.greeted()
-    const usersCount = greetingInstance.getNamesThatAreGreeted()
+    const users = greetingInstance.greetedNames()
+    
 
-    res.render('greeted', { user: greetingInstance.getNamesThatAreGreeted() });
+    res.render('greeted', { user:users});
 });
 
 
 
 app.get("/counter/:name", function (req, res) {
-    const name = req.params.name;
-    const greetCount = greetingInstance.getGreetCount(name);
-    console.log(greetingInstance.getGreetCount(name))
-    res.render('counter', { counter: greetCount, name });
+    const greetCount = greetingInstance.greetedNames();
+    res.render('counter', { counter: greetCount});
 });
 
 

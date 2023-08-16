@@ -1,19 +1,6 @@
 
-{{!-- <div>
-    <h2>Greet Count for <a href="">{{name}}</a>:</h2>
-    <p>{{name}} has been greeted {{greetCount}} times.</p>
-    <a href="/">Back to Homepage</a>
-</div> --}}
 <div>
-    <h2>Greet Count for {{name}}:</h2>
-    <p>{{name}} has been greeted {{getGreetCount name}} times.</p>
-    <h3>Greetings for {{name}}:</h3>
-    <ul>
-        {{#each savedNames}}
-        <li>
-            {{this}} - {{getGreetCount this}} times
-        </li>
-        {{/each}}
-    </ul>
+    <h2>Greet Count for {{names}}:</h2>
+    <p>{{names}} has been greeted {{number}} times.</p>
     <a href="/">Back to Homepage</a>
 </div>
