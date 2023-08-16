@@ -1,4 +1,4 @@
-export default function Greetings(list) {
+export default function Greetings(db) {
     let namesGreeted = [];
     let clearMsg = "";
     let greetingMsg = "";
@@ -26,24 +26,36 @@ export default function Greetings(list) {
         return selectedLanguage
     }
 
-    function setGreeting(username, selectedLanguage) {
+    async function setGreeting(username, selectedLanguage) {
+//Select name from the database
+//if the name exist update the count else if the name does not exist insert into the table 
+//SELECT names from greetedNames where names=$1', ['Ngomso'];
 
         if (username) {
 
             if (selectedLanguage === "Eng") {
                 greetingMsg = "Hello!" + " " + username;
-                namesGreeted.push({names: username, number: 1})
+                await db.none(
+                    "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                    [username, 1]
+                );
             }
 
 
             else if (selectedLanguage === "Esp") {
                 greetingMsg = "Ola!" + " " + username;
-                namesGreeted.push({names: username, number: 1})
+                await db.none(
+                    "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                    [username, 1]
+                );
             }
 
             else if (selectedLanguage === "Ven") {
                 greetingMsg = "Ndaa!" + " " + username;
-                namesGreeted.push({names: username, number: 1})
+                await db.none(
+                    "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                    [username, 1]
+                );
             }
         }
 
@@ -63,8 +75,11 @@ export default function Greetings(list) {
 
 
 
-    function counter() {
-        return namesGreeted.length;
+    async function counter() {
+        //WRITE A SELECT STATEMENT THAT SELECT ITEMS FROM YOUR EXISTING TABLES AND GET THE LENGTH OF THE LIST
+        let selectQuery = await db.any(
+            "SELECT count FROM greetedNames");
+        return selectQuery.length;
     }
 
    
@@ -106,10 +121,10 @@ export default function Greetings(list) {
 
     // }
 
-    // function clearButton() {
-    //     namesGreeted.length = 0;
-    //     clearMsg = "Successfully cleared!";
-    // }
+    async function clearButton() {
+        await db.none("DELETE FROM greetedNames")
+        
+    }
 
     // function getClearMsg() {
     //     return clearMsg;
@@ -128,7 +143,7 @@ export default function Greetings(list) {
         greetedNames,
         counter,
         // errorMessage,
-        // clearButton,
+         clearButton,
         // getClearMsg
     };
 }
