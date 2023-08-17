@@ -49,7 +49,8 @@ app.listen(PORT, function (req, res) {
 app.get("/", async function (req, res) {
     res.render('index', {
         greeted: greetingInstance.getGreetingMsg(),
-       count:await greetingInstance.counter()
+       count:await greetingInstance.counter(),
+       
     });
 });
 
@@ -72,7 +73,7 @@ app.post("/Greetings",async (req, res) => {
 
 
 app.get('/greeted', async (req, res) => {
-
+    
     const users = await greetingInstance.greetedNames()
     
 
@@ -81,9 +82,18 @@ app.get('/greeted', async (req, res) => {
 
 
 
-app.get("/counter/:name", async function (req, res) {
-    const greetCount = await greetingInstance.greetedNames();
-    res.render('counter', { count: greetCount});
+
+app.get("/counter/:name", async (req, res) => {
+    const username = req.params.name;
+    const greetCount = await greetingInstance.getGreetCount(username); // Fetch the greet count from the database
+
+    const templateData = {
+        user: username,
+        greeted: greetCount
+    };
+
+    res.render("counter", templateData);
 });
+
 
 

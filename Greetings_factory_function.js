@@ -2,7 +2,7 @@ export default function Greetings(db) {
     let namesGreeted = [];
     let greetingMsg = "";
     let selectedLanguage = "";
-    
+
 
 
     function setName(username) {
@@ -25,76 +25,42 @@ export default function Greetings(db) {
         return selectedLanguage
     }
 
-//     async function setGreeting(username, selectedLanguage) {
-// //Select name from the database
-// //if the name exist update the count else if the name does not exist insert into the table 
-// //SELECT names from greetedNames where names=$1', ['Ngomso'];
-
-//         if (username) {
-
-//             if (selectedLanguage === "Eng") {
-//                 greetingMsg = "Hello!" + " " + username;
-//                 await db.none(
-//                     "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
-//                     [username, 1]
-//                 );
-//             }
 
 
-//             else if (selectedLanguage === "Esp") {
-//                 greetingMsg = "Ola!" + " " + username;
-//                 await db.none(
-//                     "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
-//                     [username, 1]
-//                 );
-//             }
+    async function setGreeting(username, selectedLanguage) {
+        if (username) {
+            let greeting = "";
+            if (selectedLanguage === "Eng") {
+                greeting = "Hello!";
+            } else if (selectedLanguage === "Esp") {
+                greeting = "Ola!";
+            } else if (selectedLanguage === "Ven") {
+                greeting = "Ndaa!";
+            }
 
-//             else if (selectedLanguage === "Ven") {
-//                 greetingMsg = "Ndaa!" + " " + username;
-//                 await db.none(
-//                     "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
-//                     [username, 1]
-//                 );
-//             }
-//         }
-
-//     }
-
-
-async function setGreeting(username, selectedLanguage) {
-    if (username) {
-        let greeting = "";
-        if (selectedLanguage === "Eng") {
-            greeting = "Hello!";
-        } else if (selectedLanguage === "Esp") {
-            greeting = "Ola!";
-        } else if (selectedLanguage === "Ven") {
-            greeting = "Ndaa!";
-        }
-        
-        // Check if the name exists in the database
-        const existingName = await db.oneOrNone(
-            "SELECT count FROM greetedNames WHERE names = $1",
-            [username]
-        );
-        
-        if (existingName) {
-            // Update count for existing name
-            await db.none(
-                "UPDATE greetedNames SET count = count + 1 WHERE names = $1",
+            // Check if the name exists in the database
+            const existingName = await db.oneOrNone(
+                "SELECT count FROM greetedNames WHERE names = $1",
                 [username]
             );
-        } else {
-            // Insert new name with count 1
-            await db.none(
-                "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
-                [username, 1]
-            );
+
+            if (existingName) {
+                // Update count for existing name
+                await db.none(
+                    "UPDATE greetedNames SET count = count + 1 WHERE names = $1",
+                    [username]
+                );
+            } else {
+                // Insert new name with count 1
+                await db.none(
+                    "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                    [username, 1]
+                );
+            }
+
+            greetingMsg = `${greeting} ${username}`;
         }
-        
-        greetingMsg = `${greeting} ${username}`;
     }
-}
 
 
 
@@ -103,26 +69,13 @@ async function setGreeting(username, selectedLanguage) {
     }
 
 
-    // function greetedNames() {
-
-    //    return namesGreeted
-    // }
 
     async function greetedNames() {
         const greetedNames = await db.any("SELECT names FROM greetedNames");
         return greetedNames.map(entry => entry.names);
     }
-    
 
 
-
-
-    // async function counter() {
-    //     //WRITE A SELECT STATEMENT THAT SELECT ITEMS FROM YOUR EXISTING TABLES AND GET THE LENGTH OF THE LIST
-    //     let selectQuery = await db.any(
-    //         "SELECT count FROM greetedNames");
-    //     return selectQuery.length;
-    // }
 
 
     async function counter() {
@@ -131,11 +84,25 @@ async function setGreeting(username, selectedLanguage) {
         );
         return countQuery.count;
     }
-    
 
-   
 
-   
+    async function getGreetCount(username) {
+        try {
+            const queryResult = await db.one(
+                "SELECT count FROM greetedNames WHERE names = $1",
+                [username]
+            );
+
+            return queryResult.count; // because 'count' is the column name in the database
+        } catch (error) {
+            console.error("Error fetching greet count:", error);
+            return 0; // Return 0 if an error occurs
+        }
+    }
+
+
+
+
 
 
 
@@ -174,7 +141,7 @@ async function setGreeting(username, selectedLanguage) {
 
     async function clearButton() {
         await db.none("DELETE FROM greetedNames")
-        
+
     }
 
     // function getClearMsg() {
@@ -193,8 +160,9 @@ async function setGreeting(username, selectedLanguage) {
         getGreetingMsg,
         greetedNames,
         counter,
+        getGreetCount,
         // errorMessage,
-         clearButton,
+        clearButton,
         // getClearMsg
     };
 }

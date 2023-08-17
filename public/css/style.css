@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #1f2833; 
+    background-color: rgb(55, 54, 54); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,11 +23,11 @@ body {
 }
 
 a {
-    color: #b10f65
+    color: orangered;
 }
 
 h1 {
-    color:#b10f65;
+    color:orangered;
     text-align: center;
     font-size: 3rem
 }
@@ -46,11 +46,11 @@ h1 {
 .btn {
     display: inline-block;
     padding: 1rem 2.8rem;
-    background: #1f2833;
+    background: grey;
     border-radius: 4rem;
     box-shadow: 0 0 1rem;
     font-size: 1.6rem;
-    color: #760fb1;
+    color: orangered;
     letter-spacing: .1rem;
     font-weight: 600;
     transition: .5s ease;

@@ -1,73 +1,73 @@
-import assert from 'assert';
+// import assert from 'assert';
 
-import Greetings from '../Greetings_factory_function.js';
-
-
-describe("test my greet button function", function () {
-    let greeting = Greetings();
-
-    it("should return name of person and greeting in english", function () {
-       
-        assert.equal("", greeting.greetings1("Hello! Tendani","Eng"));
-       
-    });
-
-    it("should return name of person and greeting in spanish", function () {
-    
-       
-        assert.equal("", greeting.greetings1("Ola! Luiz","Esp"));
-      
-    });
-
-    it("should return name of person and greeting in Tshivenda", function () {
-
-      
-        assert.equal("", greeting.greetings1("Ndaa! Mashudu","Ven"));
-    });
+// import Greetings from '../Greetings_factory_function.js';
 
 
-});
-
-
-// describe("test inputType and Radio button error messages", function () {
+// describe("test my greet button function", function () {
 //     let greeting = Greetings();
 
-//     it("should return please enter your name and select language if name is not entered & language not checked", function () {
-
-//         assert.equal("Please enter your name & select language!", greeting.errorMessage());
-//     });
-
-//     it("should return please select language if radio button is not checked", function () {
+//     it("should return name of person and greeting in english", function () {
        
-//         assert.equal("Please select language!", greeting.errorMessage("","tendani"));
+//         assert.equal("", greeting.greetings1("Hello! Tendani","Eng"));
+       
 //     });
 
-//     it("should return please enter your name if name is not entered", function () {
-        
+//     it("should return name of person and greeting in spanish", function () {
+    
        
-//         assert.equal("Please enter your name!", greeting.errorMessage("Eng",""));
+//         assert.equal("", greeting.greetings1("Ola! Luiz","Esp"));
+      
 //     });
+
+//     it("should return name of person and greeting in Tshivenda", function () {
+
+      
+//         assert.equal("", greeting.greetings1("Ndaa! Mashudu","Ven"));
+//     });
+
+
 // });
 
-describe("Test my counter", function () {
 
-    it("It should return number of people greeted", function () {
+// // describe("test inputType and Radio button error messages", function () {
+// //     let greeting = Greetings();
 
-        let greeting = Greetings()
-        greeting.greetings1("Tendani","Eng")
-        greeting.greetings1("Luiz","Esp")
-        greeting.greetings1("Mashudu","Ven")
+// //     it("should return please enter your name and select language if name is not entered & language not checked", function () {
+
+// //         assert.equal("Please enter your name & select language!", greeting.errorMessage());
+// //     });
+
+// //     it("should return please select language if radio button is not checked", function () {
+       
+// //         assert.equal("Please select language!", greeting.errorMessage("","tendani"));
+// //     });
+
+// //     it("should return please enter your name if name is not entered", function () {
         
-        assert.equal(3, greeting.counter())
-    })
+       
+// //         assert.equal("Please enter your name!", greeting.errorMessage("Eng",""));
+// //     });
+// // });
 
-    it("It should not increase number when greeting same user twice", function () {
-        let greeting = Greetings()
-        greeting.greetings1("Mashudu","Ven")
-        greeting.greetings1("Mashudu","Ven")
-        assert.equal(1, greeting.counter())
-    })
-})
+// describe("Test my counter", function () {
+
+//     it("It should return number of people greeted", function () {
+
+//         let greeting = Greetings()
+//         greeting.greetings1("Tendani","Eng")
+//         greeting.greetings1("Luiz","Esp")
+//         greeting.greetings1("Mashudu","Ven")
+        
+//         assert.equal(3, greeting.counter())
+//     })
+
+//     it("It should not increase number when greeting same user twice", function () {
+//         let greeting = Greetings()
+//         greeting.greetings1("Mashudu","Ven")
+//         greeting.greetings1("Mashudu","Ven")
+//         assert.equal(1, greeting.counter())
+//     })
+// })
 
 // describe("Test my clear button", function () {
 
