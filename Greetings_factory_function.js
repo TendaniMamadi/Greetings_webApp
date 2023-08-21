@@ -1,81 +1,49 @@
 export default function Greetings(db) {
-    let namesGreeted = [];
-    let greetingMsg = "";
-    let selectedLanguage = "";
+    
 
 
 
-    function setName(username) {
-        enteredName = username
-    };
+    async function setGreeting(username) {
+        if (!username) {
+            return;
+        }
 
+        // Validate username with regex
+        const regex = /^[A-Za-z]+$/;
+        if (!regex.test(username)) {
+            return; // Return an error or handle it as needed
+        }
 
-    function getName() {
-        return enteredName
-    };
+        username = username.toLowerCase();
 
+        // Check if the name exists in the database
+        const existingName = await db.oneOrNone(
+            "SELECT count FROM greetedNames WHERE names = $1",
+            [username]
+        );
 
-    function setSelectedLanguage(language) {
-
-        selectedLanguage = language
-
-    }
-
-    function getSelectedLanguage() {
-        return selectedLanguage
-    }
-
-
-
-    async function setGreeting(username, selectedLanguage) {
-        if (username) {
-            let greeting = "";
-            if (selectedLanguage === "Eng") {
-                greeting = "Hello!";
-            } else if (selectedLanguage === "Esp") {
-                greeting = "Ola!";
-            } else if (selectedLanguage === "Ven") {
-                greeting = "Ndaa!";
-            }
-
-            // Check if the name exists in the database
-            const existingName = await db.oneOrNone(
-                "SELECT count FROM greetedNames WHERE names = $1",
+        if (existingName) {
+            // Update count for existing name
+            await db.none(
+                "UPDATE greetedNames SET count = count + 1 WHERE names = $1",
                 [username]
             );
-
-            if (existingName) {
-                // Update count for existing name
-                await db.none(
-                    "UPDATE greetedNames SET count = count + 1 WHERE names = $1",
-                    [username]
-                );
-            } else {
-                // Insert new name with count 1
-                await db.none(
-                    "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
-                    [username, 1]
-                );
-            }
-
-            greetingMsg = `${greeting} ${username}`;
+        } else {
+            // Insert new name with count 1
+            await db.none(
+                "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                [username, 1]
+            );
         }
+
+       
     }
-
-
-
-    function getGreetingMsg() {
-        return greetingMsg
-    }
-
 
 
     async function greetedNames() {
         const greetedNames = await db.any("SELECT names FROM greetedNames");
         return greetedNames.map(entry => entry.names);
     }
-
-
 
 
     async function counter() {
@@ -102,43 +70,6 @@ export default function Greetings(db) {
 
 
 
-
-
-
-
-    // function errorMessage(radioBtn, inputType) {
-
-    //     if (!inputType && !radioBtn) {
-
-    //         errorMsg = "Please enter your name & select language!";
-
-    //     }
-
-
-    //     if (!radioBtn) {
-    //         errorMsg = "Please select language!";
-
-    //     }
-
-    //     else if (!inputType) {
-
-    //         if (radioBtn === "Eng") {
-    //             errorMsg = "Please enter your name!"
-
-    //         } else if (radioBtn === "Esp") {
-    //             errorMsg = "Introduzca su nombre!"
-
-    //         } else if
-    //             (radioBtn === "Ven") {
-    //             errorMsg = "Dzhenisani dzina!"
-
-    //         }
-
-    //     }
-
-
-    // }
-
     async function clearButton() {
         await db.none("DELETE FROM greetedNames")
 
@@ -152,16 +83,12 @@ export default function Greetings(db) {
 
 
     return {
-        setName,
-        getName,
-        setSelectedLanguage,
-        getSelectedLanguage,
+      
         setGreeting,
-        getGreetingMsg,
+        //getGreetingMsg,
         greetedNames,
         counter,
         getGreetCount,
-        // errorMessage,
         clearButton,
         // getClearMsg
     };
