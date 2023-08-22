@@ -4,7 +4,7 @@ export default function FrontEnd(dblogic) {
     let selectedLanguage = "";
 
 
-    function greet(username, selectedLanguage) {
+    async function greet(username, selectedLanguage) {
         if (!username) {
             return;
         }
@@ -26,7 +26,7 @@ export default function FrontEnd(dblogic) {
         } else if (selectedLanguage === "Ven") {
             greeting = "Ndaa!";
         }
-        dblogic.setGreeting(username, selectedLanguage)
+        await dblogic.setGreeting(username, selectedLanguage)
         greetingMsg = `${greeting} ${username}`;
     }
 

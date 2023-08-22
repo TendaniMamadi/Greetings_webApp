@@ -7,10 +7,20 @@ import Greetings from './Greetings_factory_function.js';
 import importing_frontEnd from './importing_frontEnd.js';
 import pgPromise from 'pg-promise';
 
-const connectionString = process.env.DATABASE_URL || 'postgres://thegreetingtable_user:UM0BU5h6AUxD7d7Y1X7aoI3PfyMgLcm5@dpg-cjd021fdb61s73ahmqdg-a.oregon-postgres.render.com/thegreetingtable?ssl=true'
 
+const DATABASE_URL = process.env.DATABASE_URL || 'postgres://thegreetingtable_user:UM0BU5h6AUxD7d7Y1X7aoI3PfyMgLcm5@dpg-cjd021fdb61s73ahmqdg-a.oregon-postgres.render.com/thegreetingtable?ssl=true'
+
+const config = { 
+	connectionString : DATABASE_URL
+}
+
+if (process.env.NODE_ENV == 'production') {
+	config.ssl = { 
+		rejectUnauthorized : false
+	}
+}
 const pgp = pgPromise()
-const db = pgp(connectionString);
+const db = pgp(config);
 const app = express();
 const greetingInstance = Greetings(db);
 const frontendInstance = importing_frontEnd(greetingInstance)
@@ -28,6 +38,8 @@ app.use(session({
 app.use(flash())
 app.set('view engine', 'handlebars');
 app.set('views', './views');
+
+
 
 
 app.use(express.static('public'));
@@ -74,7 +86,8 @@ app.post("/Greetings", async (req, res) => {
 
     if(username!=="" && selectedLanguage){
 
-        frontendInstance.greet(username,selectedLanguage)
+       await frontendInstance.greet(username,selectedLanguage)
+       
     }else{
 
         req.flash('info', frontendInstance.errorMessage(selectedLanguage, username))
@@ -82,7 +95,7 @@ app.post("/Greetings", async (req, res) => {
 
     //const greetingMessage = await greetingInstance.setGreeting(username, selectedLanguage);
 
-    res.render('/')
+    res.redirect('/')
 });
 
 

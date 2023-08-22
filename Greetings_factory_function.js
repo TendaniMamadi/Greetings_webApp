@@ -45,9 +45,7 @@ export default function Greetings(db) {
 
 
     async function counter() {
-        const countQuery = await db.one(
-            "SELECT COUNT(*) AS count FROM greetedNames"
-        );
+        const countQuery = await db.one("SELECT COUNT(*) AS count FROM greetedNames");
         return countQuery.count;
     }
 
