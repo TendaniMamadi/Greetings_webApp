@@ -1,6 +1,4 @@
 export default function Greetings(db) {
-    
-
 
 
     async function setGreeting(username) {
@@ -14,11 +12,11 @@ export default function Greetings(db) {
             return; // Return an error or handle it as needed
         }
 
-        username = username.toLowerCase();
+        username = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
 
         // Check if the name exists in the database
         const existingName = await db.oneOrNone(
-            "SELECT count FROM greetedNames WHERE names = $1",
+            "SELECT names FROM greetedNames WHERE names = $1",
             [username]
         );
 

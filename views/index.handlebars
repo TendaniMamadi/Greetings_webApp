@@ -2,7 +2,7 @@
 
     <section class="Top">
         <div class="heading">
-            <h1><a href="/greeted" class="nav-link text-info">Greetings</a></h1>
+            <h1>Greeting App</h1>
         </div>
     </section>
 
@@ -10,45 +10,64 @@
     <section class="middle">
         <div class="functionality">
 
-            <h5 style="color: orangered">
+            <h5 style="color: #66fcf1;" class="counter">
                 Number of Greetings:
-                <span  class="count" style="color: orangered">{{count}}</span>
+                <span class="count" style="color: #66fcf1;">{{count}}</span><br>
+                <br>
+                <a href="/greeted" class="nav-link text-info"><button>Names Greeted</button></a>
             </h5>
+            <br>
 
             <form action="/Greetings" method="POST">
 
                 <div class="greet">
-                    <p class="message" style="color: white;" >{{greeted}}</p>
+                    <p class="message" style="color: white;">{{greeted}}</p>
                 </div>
 
                 <div class="error">
-                    <p class="message">{{Greetings}}</p>
+                    {{#if messages.info}}
+                    <p class="message" style="color: white;">{{messages.info}}</p>
+                    {{/if}}
+
                 </div>
+                <br>
 
-                <label for="nameInput" style="color: orangered">Name:</label>
-                <input id="nameInput" type="text" name="nameInput" class="textBox" placeholder="Enter your name">
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <input type="radio" name="Language" value="Eng" id="English">
-                        <label for="English" style="color: orangered;">English</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="radio" name="Language" value="Esp" id="Spanish">
-                        <label for="Spanish" style="color: orangered;">Spanish</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="radio" name="Language" value="Ven" id="TshiVenda">
-                        <label for="TshiVenda" style="color: orangered;">TshiVenda</label>
-                    </div>
+                <div>
+                    <label for="nameInput" style="color: #66fcf1;">Name:</label>
+                    <input id="nameInput" type="text" name="nameInput" class="textBox" placeholder="Enter your name">
                 </div>
+                <br>
 
-                <button type="submit" value="Greet Me" class="btn btn-primary btn-sm greetings">Greet</button>
-            </form>
-            <form action="/clear" method="POST">
 
-                <button type="submit" value="Clear" class="btn btn-primary btn-sm clearing">Clear</button>
+                <label>
+                    <input type="radio" name="Language" value="Eng" id="English">
+                    <label for="English" style="color: #66fcf1;">English</label>
+                </label>
+
+                <label>
+                    <input type="radio" name="Language" value="Esp" id="Spanish">
+                    <label for="Spanish" style="color: #66fcf1;">Spanish</label>
+                </label>
+
+                <label>
+                    <input type="radio" name="Language" value="Ven" id="TshiVenda">
+                    <label for="TshiVenda" style="color: #66fcf1;">TshiVenda</label>
+                </label>
+
+
+                <br>
+                <div class="d-flex">
+
+                    <button type="submit" value="Greet Me" class="btn btn-primary btn-sm greetings">Greet</button>
+                    &nbsp;
+                    <a style="text-decoration: none;" href="/clear" value="Clear"
+                        class="btn btn-primary btn-sm clearing">Clear</a>
+                </div>
             </form>
+            <br>
+
+
+
         </div>
 
 
@@ -57,4 +76,4 @@
 
 </div>
 
- <p></p>
+<p></p>

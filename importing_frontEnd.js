@@ -15,7 +15,7 @@ export default function FrontEnd(dblogic) {
             return; // Return an error or handle it as needed
         }
 
-        username = username.toLowerCase();
+        username = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
 
         let greeting = "";
 
@@ -32,36 +32,26 @@ export default function FrontEnd(dblogic) {
 
     function errorMessage(radioBtn, inputType) {
 
+        let errorMsg = ""
+
         if (!inputType && !radioBtn) {
 
             errorMsg = "Please enter your name & select language!";
 
-        }
-
-
-        if (!radioBtn) {
+        } else if (!radioBtn) {
             errorMsg = "Please select language!";
 
+        } else if (!inputType) {
+
+            errorMsg = "Please enter your name!"
         }
 
-        else if (!inputType) {
-
-            if (radioBtn === "Eng") {
-                errorMsg = "Please enter your name!"
-
-            } else if (radioBtn === "Esp") {
-                errorMsg = "Introduzca su nombre!"
-
-            } else if
-                (radioBtn === "Ven") {
-                errorMsg = "Dzhenisani dzina!"
-
-            }
-
-        }
-
+        return errorMsg
 
     }
+
+
+
 
     function setName(username) {
         enteredName = username
@@ -95,7 +85,7 @@ export default function FrontEnd(dblogic) {
         setSelectedLanguage,
         getSelectedLanguage,
         getGreetingMsg,
-        errorMessage,
+        errorMessage
     }
 
 }

@@ -54,12 +54,13 @@ app.get("/", async function (req, res) {
     res.render('index', {
         greeted: frontendInstance.getGreetingMsg(),
         count: await greetingInstance.counter(),
+        messages: req.flash()
 
 
     });
 });
 
-app.post("/clear", async function (req, res) {
+app.get("/clear", async function (req, res) {
 
     greetingInstance.clearButton();
     res.redirect('/')
@@ -67,14 +68,21 @@ app.post("/clear", async function (req, res) {
 
 app.post("/Greetings", async (req, res) => {
 
-    
+
     const username = req.body.nameInput;
     const selectedLanguage = req.body.Language;
-    frontendInstance.greet(username,selectedLanguage)
 
-    // const greetingMessage = await greetingInstance.setGreeting(username, selectedLanguage);
+    if(username!=="" && selectedLanguage){
 
-    res.redirect('/')
+        frontendInstance.greet(username,selectedLanguage)
+    }else{
+
+        req.flash('info', frontendInstance.errorMessage(selectedLanguage, username))
+    }
+
+    //const greetingMessage = await greetingInstance.setGreeting(username, selectedLanguage);
+
+    res.render('/')
 });
 
 

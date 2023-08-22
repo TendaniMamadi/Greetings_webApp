@@ -1,17 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: rgb(55, 54, 54); 
+    background-color: #1f2833;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
+    height: 100vh;
     text-align: center;
-   
+
 }
 
 .container-fluid {
@@ -22,45 +22,48 @@ body {
     text-align: center;
 }
 
+label {
+    display: block; 
+    margin-bottom: 10px; 
+    font-size: 16px;
+}
+
+input[type="radio"]{
+    vertical-align: middle; 
+    margin-right: 5px;
+}
+
 a {
-    color: orangered;
+    color: #66fcf1;
 }
 
 h1 {
-    color:orangered;
+    color: #66fcf1;
     text-align: center;
-    font-size: 3rem
-}
-
-.check {
-
-    margin: 3rem 0rem 3rem 0rem;
-    font-size: 1.4rem;
-
-}
-.Error {
-    font-size: x-large;
+    font-size: 3rem;
+    margin: auto;
 }
 
 
 .btn {
     display: inline-block;
     padding: 1rem 2.8rem;
-    background: grey;
+    background: #1f2833;
     border-radius: 4rem;
     box-shadow: 0 0 1rem;
-    font-size: 1.6rem;
-    color: orangered;
+    font-size: 1rem;
+    color: #66fcf1;
     letter-spacing: .1rem;
-    font-weight: 600;
+    font-weight: 200;
     transition: .5s ease;
 
 }
 
+
+
 .btn:hover {
     box-shadow: none;
 }
-
 
 
 .functionality input {
