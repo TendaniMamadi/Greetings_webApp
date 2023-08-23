@@ -40,15 +40,11 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 
-
-
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
-
-
 
 
 // Start the server
@@ -67,7 +63,6 @@ app.get("/", async function (req, res) {
         greeted: frontendInstance.getGreetingMsg(),
         count: await greetingInstance.counter(),
         messages: req.flash(),
-        warning: req.flash()
 
     });
 });
@@ -79,7 +74,6 @@ app.get("/clear", async function (req, res) {
 });
 
 app.post("/Greetings", async (req, res) => {
-
 
     const username = req.body.nameInput;
     const selectedLanguage = req.body.Language;
@@ -97,7 +91,12 @@ app.post("/Greetings", async (req, res) => {
 
     req.flash('info', frontendInstance.errorMessage(selectedLanguage, username, regexTest))
 
-    res.redirect('/')
+    res.render('index', {
+        greeted: frontendInstance.getGreetingMsg(),
+        count: await greetingInstance.counter(),
+        messages: req.flash(),
+
+    });
 });
 
 

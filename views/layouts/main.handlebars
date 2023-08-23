@@ -17,11 +17,18 @@
 </body>
 <script>
     const message = document.querySelector('.error');
+    const grt = document.querySelector('.greet');
     if (message.innerText !== "") {
         setTimeout(function () {
             message.innerText = '';
-        }, 5000);
+        }, 3000);
+    }else if(grt.innerText !== ""){
+        setTimeout(function () {
+            grt.innerText = '';
+        }, 3000);
     }
+
+
 
 
 </script>
