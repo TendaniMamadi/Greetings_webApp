@@ -34,7 +34,7 @@ export default function Greetings(db) {
             );
         }
 
-       
+
     }
 
 
@@ -71,21 +71,16 @@ export default function Greetings(db) {
 
     }
 
-    // function getClearMsg() {
-    //     return clearMsg;
-    // }
+
 
 
 
 
     return {
-      
         setGreeting,
-        //getGreetingMsg,
         greetedNames,
         counter,
         getGreetCount,
         clearButton,
-        // getClearMsg
     };
 }
