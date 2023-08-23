@@ -91,10 +91,10 @@ h1 {
     color: orange;
 }
 
-.red {
-    color: red;
+.error{
+    color: orange;
 }
 
-.green {
+.greet {
     color: green;
 }
