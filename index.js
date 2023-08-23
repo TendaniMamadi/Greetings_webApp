@@ -10,14 +10,14 @@ import pgPromise from 'pg-promise';
 
 const DATABASE_URL = process.env.DATABASE_URL || 'postgres://thegreetingtable_user:UM0BU5h6AUxD7d7Y1X7aoI3PfyMgLcm5@dpg-cjd021fdb61s73ahmqdg-a.oregon-postgres.render.com/thegreetingtable?ssl=true'
 
-const config = { 
-	connectionString : DATABASE_URL
+const config = {
+    connectionString: DATABASE_URL
 }
 
 if (process.env.NODE_ENV == 'production') {
-	config.ssl = { 
-		rejectUnauthorized : false
-	}
+    config.ssl = {
+        rejectUnauthorized: false
+    }
 }
 const pgp = pgPromise()
 const db = pgp(config);
@@ -66,8 +66,8 @@ app.get("/", async function (req, res) {
     res.render('index', {
         greeted: frontendInstance.getGreetingMsg(),
         count: await greetingInstance.counter(),
-        messages: req.flash()
-
+        messages: req.flash(),
+        warning: req.flash()
 
     });
 });
@@ -84,16 +84,18 @@ app.post("/Greetings", async (req, res) => {
     const username = req.body.nameInput;
     const selectedLanguage = req.body.Language;
 
-    if(username!=="" && selectedLanguage){
+    // Validate username with regex
+    const regex = /[^A-Za-z ]/g
+    const regexTest = regex.test(username);
 
-       await frontendInstance.greet(username,selectedLanguage)
-       
-    }else{
 
-        req.flash('info', frontendInstance.errorMessage(selectedLanguage, username))
+    if (username !== "" && selectedLanguage && !regexTest) {
+
+        await frontendInstance.greet(username, selectedLanguage)
+
     }
 
-    //const greetingMessage = await greetingInstance.setGreeting(username, selectedLanguage);
+    req.flash('info', frontendInstance.errorMessage(selectedLanguage, username, regexTest))
 
     res.redirect('/')
 });

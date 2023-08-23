@@ -9,12 +9,6 @@ export default function FrontEnd(dblogic) {
             return;
         }
 
-        // Validate username with regex
-        const regex = /^[A-Za-z]+$/;
-        if (!regex.test(username)) {
-            return; // Return an error or handle it as needed
-        }
-
         username = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
 
         let greeting = "";
@@ -30,27 +24,31 @@ export default function FrontEnd(dblogic) {
         greetingMsg = `${greeting} ${username}`;
     }
 
-    function errorMessage(radioBtn, inputType) {
+
+    function errorMessage(radioBtn, inputType, rgTest) {
 
         let errorMsg = ""
 
-        if (!inputType && !radioBtn) {
+        if (radioBtn && inputType && rgTest) {
+
+            errorMsg = "Input should not contain numbers or special characters.";
+
+        } else if (!inputType && !radioBtn) {
 
             errorMsg = "Please enter your name & select language!";
 
         } else if (!radioBtn) {
+
             errorMsg = "Please select language!";
 
         } else if (!inputType) {
 
-            errorMsg = "Please enter your name!"
+            errorMsg = "Please enter your name!";
         }
 
         return errorMsg
 
     }
-
-
 
 
     function setName(username) {
@@ -86,6 +84,7 @@ export default function FrontEnd(dblogic) {
         getSelectedLanguage,
         getGreetingMsg,
         errorMessage
+
     }
 
 }

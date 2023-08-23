@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #1f2833;
+    background: #1f2833;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,13 +23,13 @@ body {
 }
 
 label {
-    display: block; 
-    margin-bottom: 10px; 
+    display: block;
+    margin-bottom: 10px;
     font-size: 16px;
 }
 
-input[type="radio"]{
-    vertical-align: middle; 
+input[type="radio"] {
+    vertical-align: middle;
     margin-right: 5px;
 }
 
@@ -87,14 +87,22 @@ h1 {
 
 }
 
-.orange {
+.regex {
     color: orange;
 }
 
-.error{
-    color: orange;
+.error {
+    color: red;
+    background-color: antiquewhite;
 }
 
 .greet {
     color: green;
+    background-color: antiquewhite;
+
+}
+
+.clear {
+    color: green;
+    background-color: antiquewhite;
 }
