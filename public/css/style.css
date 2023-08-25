@@ -97,7 +97,7 @@ h1 {
 }
 
 .greet {
-    color: green;
+    color: green !important;
     background-color: antiquewhite;
 
 }

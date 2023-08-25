@@ -16,20 +16,20 @@ export default function Greetings(db) {
 
         // Check if the name exists in the database
         const existingName = await db.oneOrNone(
-            "SELECT names FROM greetedNames WHERE names = $1",
+            "SELECT names FROM namesGreeted WHERE names = $1",
             [username]
         );
 
         if (existingName) {
             // Update count for existing name
             await db.none(
-                "UPDATE greetedNames SET count = count + 1 WHERE names = $1",
+                "UPDATE namesGreeted SET count = count + 1 WHERE names = $1",
                 [username]
             );
         } else {
             // Insert new name with count 1
             await db.none(
-                "INSERT INTO greetedNames (names, count) VALUES ($1, $2)",
+                "INSERT INTO namesGreeted (names, count) VALUES ($1, $2)",
                 [username, 1]
             );
         }
@@ -39,13 +39,13 @@ export default function Greetings(db) {
 
 
     async function greetedNames() {
-        const greetedNames = await db.any("SELECT names FROM greetedNames");
+        const greetedNames = await db.any("SELECT names FROM namesGreeted");
         return greetedNames.map(entry => entry.names);
     }
 
 
     async function counter() {
-        const countQuery = await db.one("SELECT COUNT(*) AS count FROM greetedNames");
+        const countQuery = await db.one("SELECT COUNT(*) AS count FROM namesGreeted");
         return countQuery.count;
     }
 
@@ -53,7 +53,7 @@ export default function Greetings(db) {
     async function getGreetCount(username) {
         try {
             const queryResult = await db.one(
-                "SELECT count FROM greetedNames WHERE names = $1",
+                "SELECT count FROM namesGreeted WHERE names = $1",
                 [username]
             );
 
@@ -67,7 +67,7 @@ export default function Greetings(db) {
 
 
     async function clearButton() {
-        await db.none("DELETE FROM greetedNames")
+        await db.none("DELETE FROM namesGreeted")
 
     }
 

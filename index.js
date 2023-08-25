@@ -58,12 +58,8 @@ app.listen(PORT, function (req, res) {
 
 app.get("/", async function (req, res) {
 
-
     res.render('index', {
-        greeted: frontendInstance.getGreetingMsg(),
         count: await greetingInstance.counter(),
-        messages: req.flash(),
-
     });
 });
 
@@ -89,14 +85,25 @@ app.post("/Greetings", async (req, res) => {
 
     }
 
-    req.flash('info', frontendInstance.errorMessage(selectedLanguage, username, regexTest))
+    if (!username || !selectedLanguage || regexTest) {
 
-    res.render('index', {
-        greeted: frontendInstance.getGreetingMsg(),
-        count: await greetingInstance.counter(),
-        messages: req.flash(),
+        req.flash('info', frontendInstance.errorMessage(selectedLanguage, username, regexTest))
+    }
 
-    });
+    if (username && selectedLanguage) {
+        req.flash('greet', frontendInstance.getGreetingMsg())
+
+    }
+
+
+
+    // res.render('index', {
+    //     greeted: frontendInstance.getGreetingMsg(),
+    //     count: await greetingInstance.counter(),
+    //     messages: req.flash(),
+
+    // });
+    res.redirect('/')
 });
 
 

@@ -51,6 +51,8 @@ export default function FrontEnd(dblogic) {
     }
 
 
+    
+
     function setName(username) {
         enteredName = username
     };

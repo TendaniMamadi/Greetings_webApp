@@ -22,7 +22,9 @@
             <form action="/Greetings" method="POST">
 
                 <div class="greet">
-                    <p class="message">{{greeted}}</p>
+                    {{#if messages.greet}}
+                    <p class="message">{{messages.greet}}</p>
+                    {{/if}}
                 </div>
 
                 <div class="error">
