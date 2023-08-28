@@ -1,5 +1,6 @@
 export default function FrontEnd(dblogic) {
-
+    var namesGreeted = [];
+    let clearMsg = "";
     let greetingMsg = "";
     let selectedLanguage = "";
 
@@ -77,6 +78,30 @@ export default function FrontEnd(dblogic) {
         return greetingMsg
     }
 
+    function counter() {
+
+        return namesGreeted.length
+
+    }
+
+    function clearButton() {
+        namesGreeted.length = 0
+    }
+
+    function getClearButton() {
+        return namesGreeted.length
+    }
+
+
+    function setClearMsg() {
+        clearMsg = "Successfully cleared!"
+    }
+
+    function getClearMsg() {
+        return clearMsg
+    }
+
+
 
     return {
         greet,
@@ -85,7 +110,12 @@ export default function FrontEnd(dblogic) {
         setSelectedLanguage,
         getSelectedLanguage,
         getGreetingMsg,
-        errorMessage
+        errorMessage,
+        counter,
+        clearButton,
+        getClearButton,
+        setClearMsg,
+        getClearMsg
 
     }
 
