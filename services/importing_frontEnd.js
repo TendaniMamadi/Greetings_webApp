@@ -1,7 +1,7 @@
 export default function FrontEnd(dblogic) {
-    
+
     var namesGreeted = [];
-    let clearMsg = "";
+    let clearMsg = "Database successfully cleared!";
     let greetingMsg = "";
     let selectedLanguage = "";
 
@@ -101,6 +101,7 @@ export default function FrontEnd(dblogic) {
     function getClearMsg() {
         return clearMsg
     }
+  
 
 
 

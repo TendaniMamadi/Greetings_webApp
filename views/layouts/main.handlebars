@@ -17,18 +17,28 @@
 </body>
 <script>
     const message = document.querySelector('.error');
-    
+
     const grt = document.querySelector('.greet');
-    
+
+    const clr = document.querySelector('.clear');
+
     if (message.innerText !== "") {
         setTimeout(function () {
             message.innerText = '';
         }, 3000);
 
-    }else if(grt.innerText !== ""){
+    } else if (grt.innerText !== "") {
         setTimeout(function () {
             grt.innerText = '';
         }, 3000);
+
+
+    } else if (clr.innerText !== "") {
+        setTimeout(function () {
+            clr.innerText = '';
+        }, 3000);
+
+
     }
 
 

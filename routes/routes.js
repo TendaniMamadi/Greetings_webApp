@@ -10,6 +10,7 @@ export default function routes(greetingInstance,frontendInstance) {
     async function clearStorage(req, res, next) {
 
         greetingInstance.clearButton();
+        req.flash('clr', frontendInstance.getClearMsg());
         res.redirect('/');
     }
 
