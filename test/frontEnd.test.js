@@ -1,5 +1,5 @@
 import assert from 'assert'
-import importing_frontEnd from '../importing_frontEnd.js';
+import importing_frontEnd from './services/importing_frontEnd.js';
 
 describe("test my greet button function", function () {
     let greeting = importing_frontEnd();

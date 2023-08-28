@@ -1,5 +1,5 @@
 import assert from 'assert'
-import Greetings from '../Greetings_factory_function.js';
+import Greetings from './services/Greetings_factory_function.js';
 import pgPromise from 'pg-promise';
 
 const pgp = pgPromise()
