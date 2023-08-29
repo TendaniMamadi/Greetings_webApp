@@ -24,11 +24,19 @@ describe('Greetings Module', function () {
         }
     });
 
-    it('should increment the count for an existing name', async function () {
+    it('should not increment the count for an existing name', async function () {
         await greetings.setGreeting('Jane');
         await greetings.setGreeting('Jane');
-        const count = await greetings.getGreetCount('Jane');
-        assert.equal(2, count);
+        const count = await greetings.counter();
+        assert.equal(1, count);
+
+    });
+
+    it('should show how many times the name has been greeted', async function () {
+        await greetings.setGreeting('Jane');
+        await greetings.setGreeting('Jane');
+        const nameCount = await greetings.getGreetCount('Jane');
+        assert.equal(2, nameCount);
 
     });
 
@@ -40,6 +48,16 @@ describe('Greetings Module', function () {
         assert.deepEqual(['Alice', 'Bob', 'John'], greetedNames);
 
     });
+
+    it('should count all greeted names', async function () {
+        await greetings.setGreeting('Alice');
+        await greetings.setGreeting('Bob');
+        await greetings.setGreeting('John');
+        const count  = await greetings.counter();
+        assert.deepEqual(3, count);
+
+    });
+
 
     it('should clear the greeted names', async function () {
         await greetings.setGreeting('Charlie');
